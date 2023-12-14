@@ -1,7 +1,11 @@
+import { Card } from "./components";
+
 export function Cards() {
   return (
-    <section>
-      <span>olá Cards</span>
-    </section>
+    <Card.Root>
+      <Card.Content>
+        <Card.Header/>
+      </Card.Content>
+    </Card.Root>
   );
 }
