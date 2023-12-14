@@ -4,6 +4,25 @@ export const CardList = styled.section`
   display: flex;
   padding: 3rem;
   overflow-x: scroll;
+
+  /* ---------------------------- */
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /*    Estilo do scroll, background e borda*/
+    background: #201c29;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
+      inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.backgroundLinearGradient};
+  }
 `;
 
 export const CardContent = styled.article`
@@ -19,6 +38,20 @@ export const CardContent = styled.article`
   background: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.boxShadow};
   transition: 0.2s ease;
+
+  /* ---------------------------- */
+
+  &:hover {
+    transform: translateY(-1rem) rotate(3deg);
+  }
+
+  &:hover ~ & {
+    transform: translateX(130px);
+  } 
+
+  &:not(:first-child) {
+    margin-left: -130px;
+  }
 `;
 
 export const CardHeaderStyle = styled.header`
