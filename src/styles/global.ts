@@ -8,8 +8,12 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'DM Mono', monospace;
   }
 
+  :focus {
+        outline: 0;
+    }
+
   body {
     background-color: ${(props) => props.theme.primary};
     color: ${(props) => props.theme.text};
   }
-`
+`;
