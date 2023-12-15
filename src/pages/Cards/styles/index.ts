@@ -6,6 +6,20 @@ export const CardList = styled.section`
   overflow-x: scroll;
 
   /* ---------------------------- */
+  & {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: animeLeft 0.3s forwards;
+  }
+
+  @keyframes animeLeft {
+    to {
+      opacity: 1;
+      transform: initial;
+    }
+  }
+
+  /* ---------------------------- */
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -47,7 +61,7 @@ export const CardContent = styled.article`
 
   &:hover ~ & {
     transform: translateX(130px);
-  } 
+  }
 
   &:not(:first-child) {
     margin-left: -130px;

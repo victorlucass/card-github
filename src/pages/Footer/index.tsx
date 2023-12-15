@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { useDataContext } from "../../context/useData";
+
 export function Footer() {
+  const { useData } = useContext(useDataContext);
+
+  console.log(useData)
+
   return (
     <>
       <h1
@@ -6,7 +13,9 @@ export function Footer() {
           color: "red",
         }}
       >
-        Footer
+        {
+          useData.login
+        }
       </h1>
     </>
   );
