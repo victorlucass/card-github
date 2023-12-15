@@ -39,4 +39,9 @@ export const HeaderButton = styled.button`
     border: 1px solid ${(props) => props.theme.primary};
     cursor: pointer;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;

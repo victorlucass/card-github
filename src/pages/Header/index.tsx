@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { UserProps } from "../../interfaces/userProps";
 import { service } from "../../services";
 import { useDataContext } from "../../context/useData";
@@ -16,16 +16,18 @@ export function HeaderPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { username } = useParams();
+  const [loading, setLoading] = useState(false);
 
   const handleFetchData = useCallback(async () => {
+    setLoading(true);
     const { data } = await service
       .getUserGitHub(
         inputRef.current
           ? inputRef.current.value.split(" ").join("")
           : "octocat"
       )
-      .catch(({response: {data: err}}) => {
-        toast.error(err.message)
+      .catch(({ response: { data: err } }) => {
+        toast.error(err.message);
       });
 
     const { avatar_url, login, location, followers, following } = data;
@@ -40,7 +42,8 @@ export function HeaderPage() {
 
     setUseData(user);
     navigate(`/${login}`, { replace: true });
-    toast(`Oi! ${login}`, {icon: '👋'});
+    toast(`Oi! ${login}`, { icon: "👋" });
+    setLoading(false);
   }, [setUseData, navigate]);
 
   useEffect(() => {
@@ -60,7 +63,11 @@ export function HeaderPage() {
             ref={inputRef}
             onKeyDown={(e) => e.key === "Enter" && handleFetchData()}
           />
-          <HeaderButton type="submit" onClick={handleFetchData}>
+          <HeaderButton
+            type="submit"
+            onClick={handleFetchData}
+            disabled={loading}
+          >
             Buscar
           </HeaderButton>
         </HeaderContent>
