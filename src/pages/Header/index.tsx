@@ -9,6 +9,7 @@ import {
   HeaderContent,
   HeaderInput,
 } from "./styled";
+import toast, { Toaster } from "react-hot-toast";
 
 export function HeaderPage() {
   const { setUseData } = useContext(useDataContext);
@@ -17,10 +18,18 @@ export function HeaderPage() {
   const { username } = useParams();
 
   const handleFetchData = useCallback(async () => {
-    const { data } = await service.getUserGitHub(
-      inputRef.current ? inputRef.current.value.split(" ").join("") : "octocat"
-    );
+    const { data } = await service
+      .getUserGitHub(
+        inputRef.current
+          ? inputRef.current.value.split(" ").join("")
+          : "octocat"
+      )
+      .catch(({response: {data: err}}) => {
+        toast.error(err.message)
+      });
+
     const { avatar_url, login, location, followers, following } = data;
+
     const user: UserProps = {
       avatar_url,
       login,
@@ -29,9 +38,9 @@ export function HeaderPage() {
       following,
     };
 
-    console.log(user);
     setUseData(user);
     navigate(`/${login}`, { replace: true });
+    toast(`Oi! ${login}`, {icon: '👋'});
   }, [setUseData, navigate]);
 
   useEffect(() => {
@@ -42,18 +51,20 @@ export function HeaderPage() {
   }, [handleFetchData, username]);
 
   return (
-    <HeaderContainer>
-      <h1>Git Card</h1>
-      <HeaderContent>
-        <HeaderInput
-          type="text"
-          ref={inputRef}
-          onKeyDown={(e) => e.key === "Enter" && handleFetchData()}
-        />
-        <HeaderButton type="submit" onClick={handleFetchData}>
-          Buscar
-        </HeaderButton>
-      </HeaderContent>
-    </HeaderContainer>
+    <>
+      <HeaderContainer>
+        <h1>Git Card</h1>
+        <HeaderContent>
+          <HeaderInput
+            type="text"
+            ref={inputRef}
+            onKeyDown={(e) => e.key === "Enter" && handleFetchData()}
+          />
+          <HeaderButton type="submit" onClick={handleFetchData}>
+            Buscar
+          </HeaderButton>
+        </HeaderContent>
+      </HeaderContainer>
+    </>
   );
 }
