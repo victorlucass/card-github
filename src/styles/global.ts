@@ -16,4 +16,8 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${(props) => props.theme.primary};
     color: ${(props) => props.theme.text};
   }
+
+  span {
+    display: block;
+  }
 `;

@@ -9,7 +9,7 @@ import {
   HeaderContent,
   HeaderInput,
 } from "./styled";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export function HeaderPage() {
   const { setUseData } = useContext(useDataContext);
@@ -28,7 +28,10 @@ export function HeaderPage() {
       )
       .catch(({ response: { data: err } }) => {
         toast.error(err.message);
-      });
+        setUseData({});
+        navigate("", { replace: true });
+        inputRef.current!.value = "";
+      }).finally(() => setLoading(false));
 
     const { avatar_url, login, location, followers, following } = data;
 
@@ -43,7 +46,6 @@ export function HeaderPage() {
     setUseData(user);
     navigate(`/${login}`, { replace: true });
     toast(`Oi! ${login}`, { icon: "👋" });
-    setLoading(false);
   }, [setUseData, navigate]);
 
   useEffect(() => {
