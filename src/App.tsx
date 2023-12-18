@@ -10,12 +10,13 @@ import { useDataContext } from "./context/useData/index";
 export function App() {
   const [theme, setTheme] = useState(themeDark);
   const [useData, setUseData] = useState({});
+  const [repos, setRepos] = useState([]);
 
   
   return (
     <>
       <ThemeProvider theme={theme}>
-        <useDataContext.Provider value={{ useData, setUseData }}>
+        <useDataContext.Provider value={{ useData, setUseData, repos, setRepos }}>
           <BrowserRouter>
             <GlobalStyle />
             <Router />

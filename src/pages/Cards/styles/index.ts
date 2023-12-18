@@ -1,10 +1,22 @@
 import styled from "styled-components";
 
-export const CardList = styled.section`
+export const CardList = styled.section<{icon: string}>`
   display: flex;
   padding: 3rem;
   overflow-x: scroll;
+  scroll-behavior: smooth;
 
+  &::after {
+    content: "${(props) => props.icon}";
+    position: sticky;
+    top: 30px;
+    right: 30px;
+    color: ${(props) => props.theme.secondary};
+    animation: seta 0.5s ease-in 0s infinite alternate;
+    font-size: 1.75rem;
+    margin-top: -2rem;
+  }
+  
   /* ---------------------------- */
   & {
     opacity: 0;
@@ -16,6 +28,16 @@ export const CardList = styled.section`
     to {
       opacity: 1;
       transform: initial;
+    }
+  }
+
+  @keyframes seta {
+    from {
+      right: 30px;
+    }
+
+    to {
+      right: 20px;
     }
   }
 
@@ -43,10 +65,11 @@ export const CardContent = styled.article`
   display: flex;
   position: relative;
   flex-direction: column;
-  height: 350px;
-  width: 400px;
-  max-width: 400px;
-  min-width: 250px;
+  justify-content: space-between;
+  min-height: 350px;
+  min-width: 400px;
+  max-width: 100%;
+  max-height: 100%;
   padding: 1.5rem;
   border-radius: 1rem;
   background: ${(props) => props.theme.primary};
@@ -68,7 +91,10 @@ export const CardContent = styled.article`
   }
 `;
 
-export const CardHeaderStyle = styled.header`
+export const CardMainStyle = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   h2:hover {
     cursor: pointer;
     background: ${(props) => props.theme.backgroundH2};
@@ -79,12 +105,39 @@ export const CardHeaderStyle = styled.header`
   }
 `;
 
+export const CardMainDescription = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: ${(props) => props.theme.stroke};
+`;
+
+export const CardMainBranch = styled(CardMainDescription)`
+  span {
+    background: ${(props) => props.theme.backgroundH2};
+    text-shadow: none;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+`;
+
+export const CardMainForks = styled(CardMainDescription)``;
+
+export const CardMainLanguage = styled(CardMainDescription)``;
+
+export const CardMainLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: ${(props) => props.theme.stroke};
+`;
+
 export const CardInfoContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 75px 1fr;
   align-items: center;
-  margin: 3rem 0 0;
 `;
 
 export const AuthorAvatar = styled.a`

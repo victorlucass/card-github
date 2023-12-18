@@ -10,6 +10,7 @@ import {
   HeaderInput,
 } from "./styled";
 import toast from "react-hot-toast";
+import { removeSpace } from "../../utils/removeSpace";
 
 export function HeaderPage() {
   const { setUseData } = useContext(useDataContext);
@@ -23,7 +24,7 @@ export function HeaderPage() {
     const { data } = await service
       .getUserGitHub(
         inputRef.current
-          ? inputRef.current.value.split(" ").join("")
+          ? removeSpace(inputRef.current.value)
           : "octocat"
       )
       .catch(({ response: { data: err } }) => {

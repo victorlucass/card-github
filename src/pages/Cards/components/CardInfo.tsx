@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   AuthorAvatar,
   AuthorName,
@@ -7,10 +7,11 @@ import {
 } from "../styles";
 import { useDataContext } from "../../../context/useData";
 
+//name,pushed_at, url, description, default_branch, forks, language
+
 export function CardInfo() {
   const { useData } = useContext(useDataContext);
-
-  const { avatar_url, login } = useData;
+  const { avatar_url, login } = useData
 
   return (
     <CardInfoContainer>
