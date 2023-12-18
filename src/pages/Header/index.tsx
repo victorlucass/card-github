@@ -18,6 +18,7 @@ export function HeaderPage() {
   const navigate = useNavigate();
   const { username } = useParams();
   const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const handleFetchData = useCallback(async () => {
     setLoading(true);
@@ -65,11 +66,13 @@ export function HeaderPage() {
             type="text"
             ref={inputRef}
             onKeyDown={(e) => e.key === "Enter" && handleFetchData()}
+            placeholder="Pesquise um usuário"
+            onChange={(e) => setInputValue(e.target.value)}
           />
           <HeaderButton
             type="submit"
             onClick={handleFetchData}
-            disabled={loading}
+            disabled={loading || !inputValue}           
           >
             Buscar
           </HeaderButton>
