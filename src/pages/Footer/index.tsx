@@ -2,14 +2,15 @@ import { useContext } from "react";
 import { AppContext } from "../../context/useData";
 import { AuthorExtras, CreditsContainer, NoneContainer } from "./styled";
 import { HouseLine, Users } from "phosphor-react";
+import { useParams } from "react-router-dom";
 
 export function Footer() {
   const { useData } = useContext(AppContext);
-  const { location, followers, following } = useData;
+  const { username } = useParams();
 
   return (
     <>
-      {useData === null ? (
+      {!username ? (
         <NoneContainer>
           <span>nenhuma informação</span>
         </NoneContainer>
@@ -17,17 +18,17 @@ export function Footer() {
         <AuthorExtras>
           <span>
             <HouseLine weight="fill" />
-            {location}
+            {useData.location}
           </span>
 
           <span>
             <Users weight="fill" />
-            {followers} seguidores
+            {useData.followers} seguidores
           </span>
 
           <span>
             <Users weight="fill" />
-            {following} seguindo
+            {useData.following} seguindo
           </span>
         </AuthorExtras>
       )}

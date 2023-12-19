@@ -1,26 +1,33 @@
 import { useParams } from "react-router-dom";
 import { service } from "../../services";
 import { Card } from "./components";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { AppContext } from "../../context/useData";
 import { Loader } from "../components/loader/Loader";
+import toast from "react-hot-toast";
 
 export function Cards() {
   const { username } = useParams();
-  const { repos ,setRepos, loading } = useContext(AppContext);
+  const { repos, setRepos, loading } = useContext(AppContext);
 
-  const fetchRepo = async (username: string) => {
-    const res = await service.getReposGitHub(username);
-    return res;
-  };
+  const fetchRepo = useCallback(
+    async (username: string) => {
+      const data = await service.getReposGitHub(username);
+      setRepos(data);
+
+      data.length === 0 && toast("Usuário não possui repositórios", {
+        icon: "🤨",
+        duration: 5000,
+      });
+    },
+    [setRepos]
+  );
 
   useEffect(() => {
-    username
-      ? fetchRepo(username).then((data) => {
-          setRepos(data);
-        })
-      : null;
-  }, [setRepos, username]);
+    if (username) {
+      fetchRepo(username);
+    }
+  }, [fetchRepo, setRepos, username]);
 
   useEffect(() => {
     return () => {
@@ -36,20 +43,12 @@ export function Cards() {
         </div>
       ) : (
         <Card.Root>
-          {repos.length > 0 ? (
-            repos.map((repo) => (
-              <Card.Content key={repo.id}>
-                <Card.Main {...repo} />
-                <Card.Info />
-              </Card.Content>
-            ))
-          ) : (
-            <div
-              className="center"
-            >
-              Sem repositorios para mostrar 🤨
-            </div>
-          )}
+          {repos.map((repo) => (
+            <Card.Content key={repo.id}>
+              <Card.Main {...repo} />
+              <Card.Info />
+            </Card.Content>
+          ))}
         </Card.Root>
       )}
     </>

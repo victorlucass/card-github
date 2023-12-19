@@ -24,15 +24,12 @@ export function HeaderPage() {
 
   const handleFetchData = useCallback(async () => {
     setLoading(true);
-    const { data } = await service
+    const data = await service
       .getUserGitHub(
         inputRef.current ? removeSpace(inputRef.current.value) : "octocat"
-      ).then((res) => {
-        navigate(`/${res.data.login}`, { replace: true });
-        toast(`Oi! ${res.data.login}`, { icon: "👋" });
-      })
-      .catch(({ response: { data: err } }) => {
-        toast.error(err.message);
+      )
+      .catch((err) => {
+        toast.error(err.response.data.message, {icon: "❌"});
         setUseData({
           avatar_url: "",
           login: "",
@@ -40,28 +37,23 @@ export function HeaderPage() {
           followers: 0,
           following: 0,
         });
+        setInputValue("");
         navigate("", { replace: true });
         inputRef.current!.value = "";
       })
       .finally(() => setLoading(false));
+    
+      data && toast.success(`Oi! ${data.login}`, {icon: "👋"});
+      data && navigate(`/${data.login}`);
+      
+    setUseData(data as UserProps);
 
-    const { avatar_url, login, location, followers, following } = data;
-    console.log(data);
-
-    const user: UserProps = {
-      avatar_url,
-      login,
-      location,
-      followers,
-      following,
-    };
-
-    setUseData(user);
-  }, [setLoading, setUseData, navigate]);
+  }, [navigate, setLoading, setUseData]);
 
   useEffect(() => {
     if (username) {
       inputRef.current!.value = username;
+      setInputValue(username);
       handleFetchData();
     }
   }, [handleFetchData, username]);
@@ -84,7 +76,7 @@ export function HeaderPage() {
           <HeaderButton
             type="submit"
             onClick={handleFetchData}
-            disabled={loading || !inputValue}
+            disabled={loading || !inputValue || inputValue === username}
           >
             Buscar
           </HeaderButton>
