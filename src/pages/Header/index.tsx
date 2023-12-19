@@ -42,8 +42,10 @@ export function HeaderPage() {
         inputRef.current!.value = "";
       })
       .finally(() => setLoading(false));    
-      data && navigate(`/${data.login}`);
-      
+      if(data) {
+        navigate(`/${data.login}`);
+        document.title = `Git Card | ${data.login}`
+      }
     setUseData(data as UserProps);
 
     return data as UserProps;
