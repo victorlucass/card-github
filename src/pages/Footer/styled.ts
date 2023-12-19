@@ -13,3 +13,19 @@ export const AuthorExtras = styled.div`
     gap: 10px;
   }
 `;
+
+export const NoneContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  svg {
+    max-width: 100%;
+    height: 300px;
+  }
+`;
+export const CreditsContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+`;
