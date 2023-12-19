@@ -45,6 +45,8 @@ export function HeaderPage() {
       if(data) {
         navigate(`/${data.login}`);
         document.title = `Git Card | ${data.login}`
+      }else {
+        document.title = `Git Card`
       }
     setUseData(data as UserProps);
 
