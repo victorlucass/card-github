@@ -18,7 +18,7 @@ export function CardRoot({ children }: { children: React.ReactNode }) {
           ) {
             setIcon("←");
           } else {
-            setIcon("→");
+            repos >= 5 && setIcon("→");
           }
         }
       });

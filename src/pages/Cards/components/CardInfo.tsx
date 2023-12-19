@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import {
   AuthorAvatar,
-  AuthorName,
+  AuthorNamePrefix,
   CardInfoContainer,
   HalfCircle,
 } from "../styles";
@@ -11,7 +11,7 @@ import { useDataContext } from "../../../context/useData";
 
 export function CardInfo() {
   const { useData } = useContext(useDataContext);
-  const { avatar_url, login } = useData
+  const { avatar_url, login } = useData;
 
   return (
     <CardInfoContainer>
@@ -21,10 +21,12 @@ export function CardInfo() {
       <HalfCircle viewBox="0 0 106 57">
         <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
       </HalfCircle>
-      <AuthorName>
-        <div className="author-name-prefix">Autor</div>
+      <div>
+        <AuthorNamePrefix>
+          Autor
+        </AuthorNamePrefix>
         {login}
-      </AuthorName>
+      </div>
     </CardInfoContainer>
   );
 }

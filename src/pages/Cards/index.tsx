@@ -24,6 +24,13 @@ export function Cards() {
       : null;
   }, [setRepos, username]);
 
+  useEffect(() => {
+    return () => {
+      setReposData([]);
+      setRepos(0);
+    };
+  }, [setRepos]);
+
   return (
     <>
       {loading ? (
@@ -32,12 +39,24 @@ export function Cards() {
         </div>
       ) : (
         <Card.Root>
-          {reposData.length > 0 ? reposData.map((repo: any) => (
-            <Card.Content key={repo.id}>
-              <Card.Main {...repo} />
-              <Card.Info />
-            </Card.Content>
-          )) : <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>Sem repositorios para mostrar 🤨</div>}
+          {reposData.length > 0 ? (
+            reposData.map((repo: any) => (
+              <Card.Content key={repo.id}>
+                <Card.Main {...repo} />
+                <Card.Info />
+              </Card.Content>
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              Sem repositorios para mostrar 🤨
+            </div>
+          )}
         </Card.Root>
       )}
     </>

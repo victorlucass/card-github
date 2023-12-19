@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardList = styled.section<{icon: string}>`
+export const CardList = styled.section<{ icon: string }>`
   display: flex;
   padding: 3rem;
   overflow-x: scroll;
@@ -16,7 +16,7 @@ export const CardList = styled.section<{icon: string}>`
     font-size: 1.75rem;
     margin-top: -2rem;
   }
-  
+
   /* ---------------------------- */
   & {
     opacity: 0;
@@ -166,10 +166,8 @@ export const HalfCircle = styled.svg`
   pointer-events: none;
 `;
 
-export const AuthorName = styled.div`
-  .author-name-prefix {
-    font-style: normal;
-    font-weight: 700;
-    color: ${(props) => props.theme.secondary};
-  }
+export const AuthorNamePrefix = styled.div`
+  font-style: normal;
+  font-weight: 700;
+  color: ${(props) => props.theme.secondary};
 `;

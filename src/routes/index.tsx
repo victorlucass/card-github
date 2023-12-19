@@ -1,16 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "../pages/Layout";
-import { NotFound } from "../pages/NotFound";
 import { Cards } from "../pages/Cards";
 
 export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/:username" element={<Cards />} />
-      </Route>
-      <Route path="*" element={<NotFound />}>
-        <Route path="404" element={<NotFound />} />
+        <Route path="/:username" element={<Cards />}> 
+          <Route path="*" element={<Layout />} />
+        </Route>
       </Route>
     </Routes>
   );

@@ -12,6 +12,15 @@ export const AuthorExtras = styled.div`
     align-items: center;
     gap: 10px;
   }
+
+  span + span::before {
+    content: "|";
+    color: ${(props) => props.theme.stroke};
+    font-size: 1rem;
+    font-weight: bolder;
+
+  }
+
 `;
 
 export const NoneContainer = styled.div`
