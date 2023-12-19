@@ -4,6 +4,7 @@ import { service } from "../../services";
 import { useDataContext } from "../../context/useData";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  HeaderApresentation,
   HeaderButton,
   HeaderContainer,
   HeaderContent,
@@ -11,6 +12,7 @@ import {
 } from "./styled";
 import toast from "react-hot-toast";
 import { removeSpace } from "../../utils/removeSpace";
+import { Toggle } from "../components/toggle/Toggle";
 
 export function HeaderPage() {
   const { setUseData } = useContext(useDataContext);
@@ -24,16 +26,15 @@ export function HeaderPage() {
     setLoading(true);
     const { data } = await service
       .getUserGitHub(
-        inputRef.current
-          ? removeSpace(inputRef.current.value)
-          : "octocat"
+        inputRef.current ? removeSpace(inputRef.current.value) : "octocat"
       )
       .catch(({ response: { data: err } }) => {
         toast.error(err.message);
         setUseData({});
         navigate("", { replace: true });
         inputRef.current!.value = "";
-      }).finally(() => setLoading(false));
+      })
+      .finally(() => setLoading(false));
 
     const { avatar_url, login, location, followers, following } = data;
 
@@ -60,7 +61,10 @@ export function HeaderPage() {
   return (
     <>
       <HeaderContainer>
-        <h1>Git Card</h1>
+        <HeaderApresentation>
+          <h1>Git Card</h1>
+          <Toggle />
+        </HeaderApresentation>
         <HeaderContent>
           <HeaderInput
             type="text"
@@ -72,7 +76,7 @@ export function HeaderPage() {
           <HeaderButton
             type="submit"
             onClick={handleFetchData}
-            disabled={loading || !inputValue}           
+            disabled={loading || !inputValue}
           >
             Buscar
           </HeaderButton>

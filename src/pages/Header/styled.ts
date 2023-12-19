@@ -9,6 +9,14 @@ export const HeaderContainer = styled.header`
   padding: 30px 0;
 `;
 
+export const HeaderApresentation = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+`
+
 export const HeaderContent = styled.div`
   display: flex;
 `;

@@ -160,7 +160,7 @@ export const HalfCircle = styled.svg`
   width: 60px;
   height: 48px;
   fill: none;
-  stroke: #ff8a00;
+  stroke: ${(props) => props.theme.stroke};
   stroke-width: 8;
   stroke-linecap: round;
   pointer-events: none;
@@ -170,6 +170,6 @@ export const AuthorName = styled.div`
   .author-name-prefix {
     font-style: normal;
     font-weight: 700;
-    color: #7a7a8c;
+    color: ${(props) => props.theme.secondary};
   }
 `;
