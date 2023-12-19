@@ -7,7 +7,7 @@ export function Router() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/:username" element={<Cards />}> 
-          <Route path="*" element={<Layout />} />
+          <Route path="*" element={<Cards />} />
         </Route>
       </Route>
     </Routes>
