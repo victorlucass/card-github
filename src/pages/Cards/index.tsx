@@ -37,7 +37,7 @@ export function Cards() {
       ) : (
         <Card.Root>
           {repos.length > 0 ? (
-            repos.map((repo: any) => (
+            repos.map((repo) => (
               <Card.Content key={repo.id}>
                 <Card.Main {...repo} />
                 <Card.Info />
