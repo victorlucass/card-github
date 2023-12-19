@@ -27,7 +27,10 @@ export function HeaderPage() {
     const { data } = await service
       .getUserGitHub(
         inputRef.current ? removeSpace(inputRef.current.value) : "octocat"
-      )
+      ).then((res) => {
+        navigate(`/${res.data.login}`, { replace: true });
+        toast(`Oi! ${res.data.login}`, { icon: "👋" });
+      })
       .catch(({ response: { data: err } }) => {
         toast.error(err.message);
         setUseData({
@@ -54,8 +57,6 @@ export function HeaderPage() {
     };
 
     setUseData(user);
-    navigate(`/${login}`, { replace: true });
-    toast(`Oi! ${login}`, { icon: "👋" });
   }, [setLoading, setUseData, navigate]);
 
   useEffect(() => {
