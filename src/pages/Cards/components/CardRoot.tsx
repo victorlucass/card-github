@@ -8,10 +8,7 @@ export function CardRoot({ children }: { children: React.ReactNode }) {
   const { repos } = useContext(useDataContext);
 
   useEffect(() => {
-    repos >= 5 && setIcon("→");
-  }, [repos]);
-
-  useEffect(() => {
+    repos >= 5 ? setIcon("→") : setIcon("");
     refCardList.current &&
       refCardList.current.addEventListener("scroll", () => {
         if (refCardList.current !== null) {
@@ -25,7 +22,7 @@ export function CardRoot({ children }: { children: React.ReactNode }) {
           }
         }
       });
-  }, []);
+  }, [repos]);
 
   return (
     <CardList icon={icon} ref={refCardList}>

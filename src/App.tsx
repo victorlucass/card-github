@@ -11,12 +11,13 @@ export function App() {
   const [theme, setTheme] = useState(themeDark);
   const [useData, setUseData] = useState({});
   const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   
   return (
     <>
       <ThemeProvider theme={theme}>
-        <useDataContext.Provider value={{ useData, setUseData, repos, setRepos }}>
+        <useDataContext.Provider value={{ useData, setUseData, repos, setRepos, loading, setLoading }}>
           <BrowserRouter>
             <GlobalStyle />
             <Router />

@@ -17,7 +17,7 @@ export function HeaderPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { username } = useParams();
-  const [loading, setLoading] = useState(false);
+  const { loading, setLoading } = useContext(useDataContext);
   const [inputValue, setInputValue] = useState("");
 
   const handleFetchData = useCallback(async () => {
@@ -48,7 +48,7 @@ export function HeaderPage() {
     setUseData(user);
     navigate(`/${login}`, { replace: true });
     toast(`Oi! ${login}`, { icon: "👋" });
-  }, [setUseData, navigate]);
+  }, [setLoading, setUseData, navigate]);
 
   useEffect(() => {
     if (username) {

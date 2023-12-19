@@ -110,6 +110,7 @@ export const CardMainDescription = styled.p`
   align-items: center;
   gap: 10px;
   color: ${(props) => props.theme.stroke};
+  overflow: hidden;
 `;
 
 export const CardMainBranch = styled(CardMainDescription)`
