@@ -1,15 +1,15 @@
 import { useContext } from "react";
-import { useDataContext } from "../../context/useData";
+import { AppContext } from "../../context/useData";
 import { AuthorExtras, CreditsContainer, NoneContainer } from "./styled";
 import { HouseLine, Users } from "phosphor-react";
 
 export function Footer() {
-  const { useData } = useContext(useDataContext);
+  const { useData } = useContext(AppContext);
   const { location, followers, following } = useData;
 
   return (
     <>
-      {!location && !followers && !following ? (
+      {useData === null ? (
         <NoneContainer>
           <span>nenhuma informação</span>
         </NoneContainer>

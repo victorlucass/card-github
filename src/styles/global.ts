@@ -25,4 +25,11 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: white;
   }
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 `;

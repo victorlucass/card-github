@@ -134,7 +134,7 @@ export const CardMainLink = styled.a`
   color: ${(props) => props.theme.stroke};
 `;
 
-export const CardInfoContainer = styled.div`
+export const CardUserInfoContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 75px 1fr;

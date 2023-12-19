@@ -1,3 +1,4 @@
 import { createContext } from "react";
+import { ContextsProps } from "../../interfaces/ContextsProps";
 
-export const useDataContext = createContext({} as any);
+export const AppContext = createContext({} as ContextsProps);

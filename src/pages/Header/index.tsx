@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { UserProps } from "../../interfaces/userProps";
 import { service } from "../../services";
-import { useDataContext } from "../../context/useData";
+import { AppContext } from "../../context/useData";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   HeaderApresentation,
@@ -15,11 +15,11 @@ import { removeSpace } from "../../utils/removeSpace";
 import { Toggle } from "../components/toggle/Toggle";
 
 export function HeaderPage() {
-  const { setUseData } = useContext(useDataContext);
+  const { setUseData } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { username } = useParams();
-  const { loading, setLoading } = useContext(useDataContext);
+  const { loading, setLoading } = useContext(AppContext);
   const [inputValue, setInputValue] = useState("");
 
   const handleFetchData = useCallback(async () => {
@@ -30,7 +30,13 @@ export function HeaderPage() {
       )
       .catch(({ response: { data: err } }) => {
         toast.error(err.message);
-        setUseData({});
+        setUseData({
+          avatar_url: "",
+          login: "",
+          location: "",
+          followers: 0,
+          following: 0,
+        });
         navigate("", { replace: true });
         inputRef.current!.value = "";
       })

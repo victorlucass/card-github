@@ -1,6 +1,6 @@
 import { CardContent } from "../styles";
-import { CardMain } from "./CardHeader";
-import { CardInfo } from "./CardInfo";
+import { CardMain } from "./CardMain";
+import { CardUserInfo } from "./CardUserInfo";
 import { CardRoot } from "./CardRoot";
 
 
@@ -8,5 +8,5 @@ export const Card = {
   Root: CardRoot,
   Content: CardContent,
   Main: CardMain,
-  Info: CardInfo
+  Info: CardUserInfo
 }

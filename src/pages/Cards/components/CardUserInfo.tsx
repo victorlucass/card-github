@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import {
   AuthorAvatar,
   AuthorNamePrefix,
-  CardInfoContainer,
+  CardUserInfoContainer,
   HalfCircle,
 } from "../styles";
-import { useDataContext } from "../../../context/useData";
+import { AppContext } from "../../../context/useData";
 
 //name,pushed_at, url, description, default_branch, forks, language
 
-export function CardInfo() {
-  const { useData } = useContext(useDataContext);
+export function CardUserInfo() {
+  const { useData } = useContext(AppContext);
   const { avatar_url, login } = useData;
 
   return (
-    <CardInfoContainer>
+    <CardUserInfoContainer>
       <AuthorAvatar>
         <img src={avatar_url} alt="avatar" />
       </AuthorAvatar>
@@ -27,6 +27,6 @@ export function CardInfo() {
         </AuthorNamePrefix>
         {login}
       </div>
-    </CardInfoContainer>
+    </CardUserInfoContainer>
   );
 }

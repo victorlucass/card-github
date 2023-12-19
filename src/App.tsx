@@ -4,18 +4,25 @@ import { useState } from "react";
 import { themeDark } from "./styles/theme/dark";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./routes";
-import { useDataContext } from "./context/useData/index";
+import { AppContext } from "./context/useData/index";
+import { UserProps } from "./interfaces/userProps";
 
 export function App() {
   const [theme, setTheme] = useState(themeDark);
-  const [useData, setUseData] = useState({});
-  const [repos, setRepos] = useState([]);
+  const [useData, setUseData] = useState<UserProps>({
+    avatar_url: "",
+    login: "",
+    location: "",
+    followers: 0,
+    following: 0,
+  });
+  const [repos, setRepos] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <useDataContext.Provider
+        <AppContext.Provider
           value={{
             useData,
             setUseData,
@@ -31,7 +38,7 @@ export function App() {
             <GlobalStyle />
             <Router />
           </BrowserRouter>
-        </useDataContext.Provider>
+        </AppContext.Provider>
       </ThemeProvider>
     </>
   );
