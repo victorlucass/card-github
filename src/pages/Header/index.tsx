@@ -43,6 +43,7 @@ export function HeaderPage() {
       .finally(() => setLoading(false));
 
     const { avatar_url, login, location, followers, following } = data;
+    console.log(data);
 
     const user: UserProps = {
       avatar_url,
