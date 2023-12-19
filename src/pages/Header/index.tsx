@@ -41,12 +41,12 @@ export function HeaderPage() {
         navigate("", { replace: true });
         inputRef.current!.value = "";
       })
-      .finally(() => setLoading(false));
-    
-      data && toast.success(`Oi! ${data.login}`, {icon: "👋"});
+      .finally(() => setLoading(false));    
       data && navigate(`/${data.login}`);
       
     setUseData(data as UserProps);
+
+    return data as UserProps;
 
   }, [navigate, setLoading, setUseData]);
 
@@ -54,7 +54,12 @@ export function HeaderPage() {
     if (username) {
       inputRef.current!.value = username;
       setInputValue(username);
-      handleFetchData();
+      handleFetchData().then((res) => {
+        toast(`Bem vindo! ${res.login}`, {
+          icon: "👋",
+          duration: 5000,
+        })
+      });
     }
   }, [handleFetchData, username]);
 
