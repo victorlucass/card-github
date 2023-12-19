@@ -11,7 +11,7 @@ export function Footer() {
     <>
       {!location && !followers && !following ? (
         <NoneContainer>
-          <span>nenhum repositório</span>
+          <span>nenhuma informação</span>
         </NoneContainer>
       ) : (
         <AuthorExtras>

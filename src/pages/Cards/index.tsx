@@ -3,6 +3,7 @@ import { service } from "../../services";
 import { Card } from "./components";
 import { useContext, useEffect, useState } from "react";
 import { useDataContext } from "../../context/useData";
+import { Loader } from "../components/loader/Loader";
 
 export function Cards() {
   const [reposData, setReposData] = useState([]);
@@ -26,15 +27,17 @@ export function Cards() {
   return (
     <>
       {loading ? (
-        <div>Carregando...</div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Loader />
+        </div>
       ) : (
         <Card.Root>
-          {reposData.map((repo: any) => (
+          {reposData.length > 0 ? reposData.map((repo: any) => (
             <Card.Content key={repo.id}>
               <Card.Main {...repo} />
               <Card.Info />
             </Card.Content>
-          ))}
+          )) : <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>Sem repositorios para mostrar 🤨</div>}
         </Card.Root>
       )}
     </>

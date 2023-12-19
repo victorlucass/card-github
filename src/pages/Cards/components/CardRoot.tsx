@@ -14,7 +14,7 @@ export function CardRoot({ children }: { children: React.ReactNode }) {
         if (refCardList.current !== null) {
           if (
             refCardList.current.scrollLeft + refCardList.current.clientWidth >=
-            refCardList.current.scrollWidth
+            refCardList.current.scrollWidth && repos >= 5
           ) {
             setIcon("←");
           } else {
