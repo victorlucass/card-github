@@ -10,15 +10,22 @@ export function Cards() {
   const { username } = useParams();
   const { repos, setRepos, loading } = useContext(AppContext);
 
+  const sortRepositories = (repos: any[]) => {
+    return repos.sort((a, b) => {
+      return new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime();
+    });
+  };
+
   const fetchRepo = useCallback(
     async (username: string) => {
       const data = await service.getReposGitHub(username);
-      setRepos(data);
+      setRepos(sortRepositories(data));
 
-      data.length === 0 && toast("Usuário não possui repositórios", {
-        icon: "🤨",
-        duration: 5000,
-      });
+      data.length === 0 &&
+        toast("Usuário não possui repositórios", {
+          icon: "🤨",
+          duration: 5000,
+        });
     },
     [setRepos]
   );
